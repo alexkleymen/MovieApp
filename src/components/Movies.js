@@ -25,6 +25,7 @@ const Movies = () => {
             <li>
                 <Link to={match.path + '/addmovie'}>Add movie</Link>
             </li>
+            
         </ul>
 
         <Switch>
