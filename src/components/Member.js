@@ -3,7 +3,7 @@ import { MovieContext } from '../context/MoviesContext';
 import { SubscriptionContext } from '../context/SubscriptionContext';
 import Movies from './Movies';
 import { v4 as uuidv4 } from 'uuid';
-import {Link} from 'react-router-dom'
+import {Link,useParams} from 'react-router-dom'
 
 const Member   = ({data}) => {
 

@@ -20,7 +20,7 @@ const Submanagment = (props) => {
     const match = useRouteMatch()
     return ( 
         <Router>
-        <div>
+        <div style={{'margin-top': '70px'}}>
             <h2>Subscriptions</h2>
             <ul>
                 <li>

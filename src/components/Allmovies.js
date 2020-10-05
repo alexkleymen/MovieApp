@@ -1,10 +1,14 @@
 import React, { Component,useContext, useEffect, useState } from 'react';
 import { MovieContext } from '../context/MoviesContext';
 import Movie from './Movie'
+import TextField from '@material-ui/core/TextField';
+import Card from './Card'
+import Grid from '@material-ui/core/Grid';
 
 const Allmovie = () => {
     const {movies} = useContext(MovieContext)
     const [dispay,setDisplay] = useState([])
+    const [help,setHelp] = useState(false)
 
     const search = (e) =>{
         setDisplay(movies.filter(movie=>movie.name.toLowerCase().includes(e.target.value.toLowerCase())))
@@ -13,16 +17,25 @@ const Allmovie = () => {
 
     useEffect(()=>{
         setDisplay(movies)
-    },[])
+    },[movies])
     return ( 
-        <div>
-            <label>Find Movie: </label>
-            <input onChange={search} type='text' placeholder='enter movie'></input>
-            {dispay.map(movie=>{
+
+        <div style={{'margin-top' : '20px'}}>
+            <TextField
+            onChange={search}
+            label="Find Movie"
+            margin="normal"
+            variant="outlined"/>
+            
+            <Grid container  justify="space-around">
+            {
+            
+            dispay.map(movie=>{
                 return(
-                    <Movie data={movie}/>
+                    <Card data={movie}/>
                 )
             })}
+            </Grid>
         </div>
      );
 }

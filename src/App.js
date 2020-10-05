@@ -8,13 +8,15 @@ import {
 import EditUser from './components/EditUser';
 import Movies from './components/Movies'
 import Submanagment from './components/Submanagment';
-import Usermanagment from './components/Usermanagment'
+
 import MoviesContextProvider from './context/MoviesContext';
 import SubscriptionProvider from './context/SubscriptionContext';
 import UserContextProvider from './context/UserContext';
 import Grid from '@material-ui/core/Grid';
 import ButtonAppBar from './components/Appbar';
 import { makeStyles } from '@material-ui/core/styles';
+import Usermanagment from './components/Usermanagment';
+import {spacing} from '@material-ui/core'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,6 +28,8 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
   },
+  toolbarMargin: theme.mixins.toolbar,
+  
   item : {
     [theme.breakpoints.down('sm')]: {
      
@@ -53,11 +57,15 @@ function App() {
         <MoviesContextProvider>
         <SubscriptionProvider>
         
-        <Switch>
+        <Switch className>
+
+          
           
           <Route exact path='/Movies' component={Movies}/>
           <Route exact path='/Subscriptions' component={Submanagment}/>
           <Route exact path='/Usermanagment' component={Usermanagment}/>
+
+          
         </Switch>
 
         

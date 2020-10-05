@@ -34,13 +34,13 @@ export default function ButtonAppBar() {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="fixed">
         <Toolbar>
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
             <MovieFilterIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            Movies - Subscription Web Site
+            Movies
           </Typography>
           <Button color="inherit">
             <Link className={classes.link} to='/Movies'>Movies</Link>
@@ -49,7 +49,7 @@ export default function ButtonAppBar() {
           <Link className={classes.link} to='/Subscriptions'>Subscriptopn</Link>
           </Button>
           <Button color="inherit">
-          <Link className={classes.link} to='/Usermanagment'>User managment</Link>
+          <Link className={classes.link} to='/Usermanagment'>Users</Link>
           </Button>
         </Toolbar>
       </AppBar>

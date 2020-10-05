@@ -20,6 +20,7 @@ import WhatshotIcon from '@material-ui/icons/Whatshot';
 import GrainIcon from '@material-ui/icons/Grain';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import GroupIcon from '@material-ui/icons/Group';
+import {spacing} from '@material-ui/core'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -41,6 +42,7 @@ const useStyles = makeStyles((theme) => ({
         paddingTop: '10px'
         
     }
+    
   }));
 
 
@@ -55,7 +57,7 @@ const Usermanagment = () => {
     const match = useRouteMatch();
     return ( 
         <Router>
-    <div className={classes.pad}>
+    <div style={{'margin-top': '70px'}}>
         <Breadcrumbs aria-label="breadcrumb">
       <Linkk color="inherit" href="/" onClick={handleClick} className={classes.Linkk}>
         <GroupIcon className={classes.icon} />
