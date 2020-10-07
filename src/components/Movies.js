@@ -57,21 +57,21 @@ const Movies = () => {
     return ( 
     <Router>
         <div style={{'margin-top': '70px'}}>
-        <Breadcrumbs aria-label="breadcrumb">
-      <Linkk color="inherit" href="/" onClick={handleClick} className={classes.Linkk}>
-        <GroupIcon className={classes.icon} />
-        <Link className={classes.link} to={match.path + '/allmovies'} >All Movies</Link>
-      </Linkk>
-      <Linkk
-        color="inherit"
-        href="/getting-started/installation/"
-        onClick={handleClick}
-        className={classes.Linkk}
-      >
-        <PersonAddIcon className={classes.icon} />
-        <Link  className={classes.link} to={match.path + '/addmovie'} >Add Movie</Link>
-      </Linkk>
-    </Breadcrumbs>
+          <Breadcrumbs aria-label="breadcrumb">
+        <Linkk color="inherit" href="/" onClick={handleClick} className={classes.Linkk}>
+          <GroupIcon className={classes.icon} />
+          <Link className={classes.link} to={match.path + '/allmovies'} >All Movies</Link>
+        </Linkk>
+        <Linkk
+          color="inherit"
+          href="/getting-started/installation/"
+          onClick={handleClick}
+          className={classes.Linkk}
+        >
+          <PersonAddIcon className={classes.icon} />
+          <Link  className={classes.link} to={match.path + '/addmovie'} >Add Movie</Link>
+        </Linkk>
+      </Breadcrumbs>
 
         <Switch>
             <Route exact path={match.path + '/allmovies'} component={Allmovies}/>

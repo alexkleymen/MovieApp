@@ -1,5 +1,5 @@
 
-import React, { Component,useContext } from 'react';
+import React, { Component,useContext,useState,useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -11,11 +11,14 @@ import Typography from '@material-ui/core/Typography';
 import { MovieContext } from '../context/MoviesContext';
 import {Link} from 'react-router-dom'
 import {Grid} from '@material-ui/core'
+import { Block } from '@material-ui/icons';
+import SimpleCard from './SimpleCard';
+import { SubscriptionContext } from '../context/SubscriptionContext';
 
 const useStyles = makeStyles({
   root: {
     maxWidth: 345,
-    maxHeight: 645,
+    maxheight: 800,
     marginBottom: '4px'
   },
   media: {
@@ -33,6 +36,18 @@ const useStyles = makeStyles({
 export default function MediaCard({data}) {
   const classes = useStyles();
   const {movies,addMovie,updateMovie,deleteMovie} = useContext(MovieContext);
+  const {subscriptions} = useContext(SubscriptionContext)
+  const [sub,setSub] = useState([])
+
+  useEffect(()=>{
+    subscriptions.forEach(el=>{
+        el.movies.forEach(s=>{
+            if(s.movie==data.name){
+                setSub([...sub,{id: el.id ,name: el.name,date: s.date}])
+            }
+        })
+    })
+},[subscriptions])
 
   return (
     <Grid item xs={3} style={{marginBottom: '15px'}}>
@@ -63,6 +78,7 @@ export default function MediaCard({data}) {
             }}>Edit</Link>
         </Button>
       </CardActions>
+      {sub.length ? <SimpleCard data={sub}/> : ''}
     </Card>
     </Grid>
     

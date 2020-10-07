@@ -3,11 +3,35 @@ import {Link} from 'react-router-dom'
 import { UserContext } from '../context/UserContext';
 import EditUser from './EditUser'
 import useCheck from './useCheck'
+import {Grid} from '@material-ui/core'
+import Paper from '@material-ui/core/Paper';
+import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+
+const useStyles = makeStyles({
+    root: {
+      maxWidth: 345,
+      maxheight: 800,
+      marginBottom: '4px'
+    },
+    media: {
+      height: 450,
+      width: 345,
+      objectFit: "cover",
+      
+    },
+    link : {
+      textDecoration: 'none',
+      color : 'inherit'
+    },
+  });
+
 
 const User = (props) => {
     const {users,addUser,updateUser,deleteUser} = useContext(UserContext);
     const {array,add} = useCheck(props.data);
     
+    const classes = useStyles()
 
     useEffect(()=>{
         add()
@@ -19,7 +43,9 @@ const User = (props) => {
 
    
     return ( 
-     <div>
+    <Grid item xs={3}>
+        
+        <Paper style={{padding: '4px'}}>
          Name: {props.data.FirstName}<br/>
          User Name: {props.data.UserName}<br/>
          Session Time Out: {props.data.sto}<br/>
@@ -31,18 +57,23 @@ const User = (props) => {
          }<br/>
 
 
+        <Button onClick={()=>deleteUser(props.data.UserName)} size="small" color="primary">Delete</Button>
+        <Button    size="small" color="primary">
+            <Link className={classes.link}  to={{
+                    pathname: '/Usermanagment/edit',
+                    state: {props}
+                }}>Edit
+            </Link>
+        </Button>
+         
        
 
-         <button onClick={()=>deleteUser(props.data.UserName)}>Delete</button>
-         <button>
-            <Link to={{
-                pathname: '/Usermanagment/edit',
-                state: {props}
-            }}>Edit</Link>
-         </button>
 
+       
 
-    </div> );
+        
+        </Paper>
+    </Grid> );
 }
  
 export default User;

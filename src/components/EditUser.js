@@ -73,7 +73,7 @@ const EditUser = (props) => {
 
 
     return ( <div>
-        <h1>Hello Guys! {location.state.props.data.FirstName}</h1>
+        <h1>UserName:  {location.state.props.data.UserName}</h1>
         <form onSubmit={handleSubmit}>
                 
                  

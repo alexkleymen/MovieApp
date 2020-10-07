@@ -2,6 +2,10 @@ import React, { Component,useReducer,useContext } from 'react';
 import { SubscriptionContext } from '../context/SubscriptionContext';
 import {useHistory} from 'react-router-dom'
 import { v4 as uuidv4 } from 'uuid';
+import TextField from '@material-ui/core/TextField';
+import Checkbox from '@material-ui/core/Checkbox';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Button from '@material-ui/core/Button';
 
 const initialState = {
     Name: '',
@@ -37,17 +41,15 @@ const Addmember = (props) => {
     
     return ( 
         <div>
-            <label>Name:</label>
-           <input onChange={(e)=>dispatch({name: e.target.name , value: e.target.value})} value={member.Name} name='Name' type='text'></input> <br/>
 
-            <label>Email:</label>
-            <input  onChange={(e)=>dispatch({name: e.target.name , value: e.target.value})}  value={member.Email} name='Email' type='text'></input> <br/>
+            <TextField  required onChange={(e)=>dispatch({name: e.target.name , value: e.target.value})} value={member.Name} name='Name' label="Name"/><br/>
+                
+            <TextField  required onChange={(e)=>dispatch({name: e.target.name , value: e.target.value})} value={member.Email} name='Email' label="Email"/><br/>
+           
+            <TextField  required onChange={(e)=>dispatch({name: e.target.name , value: e.target.value})} value={member.City} name='City' label="City"/><br/>
 
-            <label>City:</label>
-            <input  onChange={(e)=>dispatch({name: e.target.name , value: e.target.value})} value={member.City} name='City' type='text'></input> <br/>
-
-            <button onClick={addMember}>Save</button>
-            <button onClick={()=>history.goBack()}>Cancel</button>
+            <Button onClick={addMember} color="primary">Save</Button>
+            <Button onClick={()=>history.goBack()} color="primary">Cancel</Button>
 
         </div>
      );

@@ -4,6 +4,38 @@ import { SubscriptionContext } from '../context/SubscriptionContext';
 import Movies from './Movies';
 import { v4 as uuidv4 } from 'uuid';
 import {Link,useParams} from 'react-router-dom'
+import {Grid} from '@material-ui/core'
+import Paper from '@material-ui/core/Paper';
+import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import InputLabel from '@material-ui/core/InputLabel';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import TextField from '@material-ui/core/TextField';
+
+
+const useStyles = makeStyles((theme)=>({
+    root: {
+      maxWidth: 345,
+      maxheight: 800,
+      marginBottom: '4px'
+    },
+    media: {
+      height: 450,
+      width: 345,
+      objectFit: "cover",
+      
+    },
+    link : {
+      textDecoration: 'none',
+      color : 'inherit'
+    },
+    textField: {
+        marginLeft: theme.spacing(1),
+        marginRight: theme.spacing(1),
+        width: 200,
+      },
+  }));
 
 const Member   = ({data}) => {
 
@@ -13,6 +45,7 @@ const [date,setDate] = useState('')
 const {movies} = useContext(MovieContext);
 const {subscriptions,addSub,updateSub,deleteSub,addMovieToSub} = useContext(SubscriptionContext)
 const style = hidden ? 'none' : ''; 
+const classes = useStyles()
 
 const addNewMovie = () => {
     let obj = {};
@@ -29,47 +62,74 @@ const addNewMovie = () => {
     
     return ( 
         
-        <div>
-            <h4>{data.name}</h4>
-            Email: {data.email} <br/>
-            City : {data.address.city} <br/>
-            <button>
-                <Link to={{
-                    pathname: '/Subscriptions/editmember',
-                    state: data,
-                }}>Edit</Link>
-            </button>
-            <button onClick={()=>deleteSub(data.id)}>Delete</button>
-            <h5>Movies Watched</h5>
-            <button onClick={()=>setHidden(!hidden)}>Subscribe to a new movie</button>
-            <div style={{display : style}}>
-                <label>Movie Name</label>
-                <select onChange={(e)=>setNewSub(e.target.value)}>
-                <option value="" selected disabled hidden>Choose here</option>
-                    {movies.map(movie=>{
-                        return(
-                            <option key={movie.id} value={movie.name}>{movie.name}</option>
-                        )
-                        
-                    })}
-                </select>
-                <input onChange={(e)=>setDate(e.target.value)} type='date' placeholder='enter a date to watch'></input>
+        <Grid item xs={3}>
+            <Paper style={{padding: '4px'}}>
+                <h4>{data.name}</h4>
+                Email: {data.email} <br/>
+                City : {data.address.city} <br/>
 
-                <button onClick={addNewMovie}>Subscribe</button>
 
-            </div>
-            <ul>
+                <Button  size="small" color="primary">
+                    <Link className={classes.link} to={{
+                            pathname: '/Subscriptions/editmember',
+                            state: data,
+                        }}>Edit
+                    </Link>
+                </Button>
+
+                <Button onClick={()=>deleteSub(data.id)} size="small" color="primary">Delete</Button>
+
                 
-                {
-                data.movies.length ?
-                data.movies.map(movie=>{
+
+                <Button onClick={()=>setHidden(!hidden)} variant="contained" color="primary">Subscribe to a new movie</Button>
+                <h3>Movies Watched</h3>
+                <div style={{display : style}}>
+
+
+                <InputLabel id="movieselection">Movie</InputLabel>
+                <Select
+                style={{minWidth:'209px'}}
+                labelId="movieselection"
+                value={newSub}
+                onChange={(e)=>setNewSub(e.target.value)}>
+                    {movies.map(movie=>{
                     return(
-                    <li key={uuidv4()}>{movie.movie}, {movie.date}</li>
+                        <MenuItem key={movie.id} value={movie.name}>{movie.name}</MenuItem>
                     )
-                }):
-                <h5>No Movies Seen Yet</h5>}
-            </ul>
-        </div>
+                    })}
+                </Select>
+                    <br/>
+
+                    <TextField
+                    id="date"
+                    label="Date To Watch"
+                    type="date"
+                    onChange={(e)=>setDate(e.target.value)} 
+                    className={classes.textField}
+                    InputLabelProps={{
+                    shrink: true,
+                    }}
+                /><br/>
+                
+                
+
+                <Button onClick={addNewMovie} size="small" color="primary">Subscribe</Button>
+                   
+
+                </div>
+                <ul style={{listStyleType: "none"}}>
+                    
+                    {
+                    data.movies.length ?
+                    data.movies.map(movie=>{
+                        return(
+                        <li key={uuidv4()}>{movie.movie}, {movie.date}</li>
+                        )
+                    }):''
+                    }
+                </ul>
+            </Paper>
+        </Grid>
      );
 }
  
