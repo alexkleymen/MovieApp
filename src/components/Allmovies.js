@@ -6,7 +6,7 @@ import Card from './Card'
 import Grid from '@material-ui/core/Grid';
 
 const Allmovie = () => {
-    const {movies} = useContext(MovieContext)
+    const {movies,trigger} = useContext(MovieContext)
     const [dispay,setDisplay] = useState([])
     const [help,setHelp] = useState(false)
 
@@ -18,7 +18,7 @@ const Allmovie = () => {
     useEffect(()=>{
         setDisplay(movies)
     },[movies])
-    return ( 
+    return trigger ? ( 
 
         <div style={{'margin-top' : '20px'}}>
             <TextField
@@ -37,7 +37,7 @@ const Allmovie = () => {
             })}
             </Grid>
         </div>
-     );
+     ) : ('Please wait until upload finishes')
 }
  
 export default Allmovie;

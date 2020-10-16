@@ -2,6 +2,9 @@ import React, { Component,useContext,useState,useReducer,useEffect } from 'react
 import { useHistory,useLocation } from "react-router-dom";
 import { MovieContext } from '../context/MoviesContext';
 import { v1 as uuidv1 } from 'uuid'
+import TextField from '@material-ui/core/TextField'
+import Button from '@material-ui/core/Button';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 const initialState = {
     name: '',
@@ -58,20 +61,20 @@ const Editmovie = (props) => {
 
     return ( <div>
         <form onSubmit={handleSubmit}>
-            <label>Name</label>
-            <input value={movie.name} onChange={(e)=>dispatch({value:e.target.value, name: e.target.name})} name='name' type='text'></input>
 
-            <label>Genres</label>
-            <input value={gener.map(g=>g)} onChange={addGener} type='text' name='Genres'></input>
+        <TextField  required onChange={(e)=>dispatch({value:e.target.value, name: e.target.name})}  value={movie.name}  name='name' label="Name"/><br/>
 
-            <label>Img url</label>
-            <input value={movie.Imgurl} onChange={(e)=>dispatch({value:e.target.value, name: e.target.name})} type='url' name='Imgurl'></input>
+        <TextField  required onChange={addGener}  value={gener.map(g=>g)}  name='Genres' label="Genres"/><br/>
 
-            <label>Premired</label>
-            <input  value={movie.premiered} onChange={(e)=>dispatch({value:e.target.value, name: e.target.name})} type='date' name='premiered'></input>
 
-            <button type='submit'>Save</button>
-            <button onClick={()=>history.goBack()}>Cancel</button>
+        <TextField  required onChange={(e)=>dispatch({value:e.target.value, name: e.target.name})}  value={movie.Imgurl} type='url'  name='Imgurl' label="Img url"/><br/>
+            
+        <TextField  required onChange={(e)=>dispatch({value:e.target.value, name: e.target.name})} value={movie.premiered} type='date'  name='premiered' label="Premired"/><br/>
+
+            
+            <Button type='submit' variant="contained">Save</Button>
+            <Button onClick={()=>history.goBack()} variant="contained">Cancel</Button>
+
         </form>
     </div> );
 }

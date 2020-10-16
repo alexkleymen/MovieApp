@@ -34,7 +34,7 @@ const Addmember = (props) => {
         obj.address = {}
         obj.address.city = member.City
         obj.movies = []
-        obj.id = uuidv4()
+        //obj.id = uuidv4()
         dispatch({type:'end'})
         addSub(obj)
     }

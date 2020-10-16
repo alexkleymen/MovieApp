@@ -1,4 +1,4 @@
-import React, { Component,useContext } from 'react';
+import React, { Component,useContext,useEffect } from 'react';
 import { SubscriptionContext } from '../context/SubscriptionContext';
 import Member from './Member';
 import {Grid} from '@material-ui/core'
@@ -14,6 +14,8 @@ const useStyles = makeStyles((theme) => ({
 const Allmembers = (props) => {
     const {subscriptions,addSub,updateSub,deleteSub} = useContext(SubscriptionContext)
     const classes = useStyles();
+
+   
     return ( 
         <div className={classes.root}>
             <Grid container spacing={3} justify="space-around">

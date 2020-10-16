@@ -23,7 +23,7 @@ const Allusers = () => {
           {users.map(user=>{
               return(
                    
-                  <User data={user}/>
+                  <User key={uuidv4()} data={user}/>
               )
           })}
              </Grid>

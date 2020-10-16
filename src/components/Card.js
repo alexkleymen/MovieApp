@@ -41,11 +41,12 @@ export default function MediaCard({data}) {
 
   useEffect(()=>{
     subscriptions.forEach(el=>{
+      if(el?.movies){
         el.movies.forEach(s=>{
             if(s.movie==data.name){
                 setSub([...sub,{id: el.id ,name: el.name,date: s.date}])
             }
-        })
+        })}
     })
 },[subscriptions])
 
@@ -63,7 +64,7 @@ export default function MediaCard({data}) {
             {data.name}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-          {data.genres.map((g,index,arr)=>arr.length-1==index ? `${g}` :  `${g}, `)}
+          {data.genres ? data.genres.map((g,index,arr)=>arr.length-1==index ? `${g}` :  `${g}, `) : ''}
           </Typography>
         </CardContent>
       </CardActionArea>

@@ -1,26 +1,64 @@
-import React, { Component,createContext,useState } from 'react';
-
+import React, { Component,createContext,useState,useEffect } from 'react';
+import firebase from '../utils/firebase'
 export const UserContext = createContext()
 
 const UserContextProvider = (props) => {
-    const[users,setUsers] = useState([])
+    const [users,setUsers] = useState([])
+    const [current,setCurrent] = useState('')
+    
 
     const addUser = (user) =>{
-        setUsers([...users,user])
+        const userRef = firebase.database().ref('/Users');
+        userRef.push(user);
+      
+
+
+      
     }
 
-    const updateUser =  (obj) =>{
-        let temp = [...users]
-        temp = temp.filter(user=>user.UserName!=obj.UserName)
-        temp.push(obj)
-        setUsers(temp)
+    const updateCurrent = (user) =>{
+        setCurrent(user)
     }
 
-    const deleteUser =  (us) =>{
-        setUsers(users.filter(user=>user.UserName!=us))
+    const updateUser =  (user) =>{
+        var userRef = firebase.database().ref('Users/' + user.id);
+        userRef.update({...user})
+        
     }
+
+    const deleteUser =  (id) =>{
+
+       var userRef = firebase.database().ref('Users/' + id);
+       userRef.on("value",(snapshot)=>{
+           console.log(snapshot.val())
+       })
+        userRef.remove()
+        .then(function() {
+            console.log("Remove succeeded.")
+        })
+        .catch(function(error) {
+            console.log("Remove failed: " + error.message)
+        });
+     }
+
+    useEffect(()=>{
+        const userRef = firebase.database().ref('Users');
+        userRef.on("value", function(snapshot) {
+            const usersFromFireBase = snapshot.val()
+            const userf = []
+            for(let el in usersFromFireBase){
+                userf.push({...usersFromFireBase[el],id:el})
+            }
+            console.log('useEffect userContext')
+            setUsers(userf)
+          }, function (errorObject) {
+            console.log("The read failed: " + errorObject.code);
+          });
+    
+    },[])
+    
     return ( 
-        <UserContext.Provider value={{users,addUser,updateUser,deleteUser}}>
+        <UserContext.Provider value={{users,addUser,updateUser,deleteUser,current,updateCurrent}}>
             {props.children}
         </UserContext.Provider>
     );

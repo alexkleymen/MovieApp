@@ -120,10 +120,11 @@ const addNewMovie = () => {
                 <ul style={{listStyleType: "none"}}>
                     
                     {
-                    data.movies.length ?
+                    data.movies?.length ?
                     data.movies.map(movie=>{
+                         
                         return(
-                        <li key={uuidv4()}>{movie.movie}, {movie.date}</li>
+                        <li key={uuidv4()}>{movie.movie}, {movie.date}</li> 
                         )
                     }):''
                     }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState,useEffect,useContext } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -17,6 +17,14 @@ import ButtonAppBar from './components/Appbar';
 import { makeStyles } from '@material-ui/core/styles';
 import Usermanagment from './components/Usermanagment';
 import {spacing} from '@material-ui/core'
+import Login from './components/Login';
+import Register from './components/Register';
+import home from './components/Home'
+import NotFound from './components/Notfound';
+import firebase from './utils/firebase'
+import User from './components/User';
+import {UserContext} from './context/UserContext'
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -39,8 +47,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
+
+
 function App() {
   const classes = useStyles();
+  
+
   return (
     <Router>
     
@@ -60,10 +72,13 @@ function App() {
         <Switch className>
 
           
-          
+          <Route exact path='/login' component={Login}/>
+          <Route exact path='/'  component={home}/>
+          <Route exact path='/register' component={Register}/>
           <Route exact path='/Movies' component={Movies}/>
           <Route exact path='/Subscriptions' component={Submanagment}/>
           <Route exact path='/Usermanagment' component={Usermanagment}/>
+          <Route component={NotFound} />
 
           
         </Switch>

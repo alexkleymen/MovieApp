@@ -2,6 +2,8 @@ import React, { Component,useReducer,useContext,useEffect } from 'react';
 import { SubscriptionContext } from '../context/SubscriptionContext';
 import {useHistory,useLocation} from 'react-router-dom'
 import { v4 as uuidv4 } from 'uuid';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 
 const initialState = {
     name: '',
@@ -34,28 +36,28 @@ const Editmember = (props) => {
         obj.email = member.email
         obj.address.city = member.city
         updateSub(obj)
-        dispatch({type:'end'})
-        
+        dispatch({type:'end'})  
     }
-
-
     useEffect(()=>{
         dispatch({type:'init', value: {...location.state,city: location.state.address.city}})
     },[])
     
     return ( 
         <div>
-            <label>Name:</label>
-           <input onChange={(e)=>dispatch({name: e.target.name , value: e.target.value})} value={member.name} name='name' type='text'></input> <br/>
 
-            <label>Email:</label>
-            <input  onChange={(e)=>dispatch({name: e.target.name , value: e.target.value})}  value={member.email} name='email' type='text'></input> <br/>
+<TextField required onChange={(e)=>dispatch({name: e.target.name , value: e.target.value})} value={member.name} type='text' name='name' label="Name" /><br/>
+            
 
-            <label>City:</label>
-            <input  onChange={(e)=>dispatch({name: e.target.name , value: e.target.value})} value={member.city} name='city' type='text'></input> <br/>
+<TextField required onChange={(e)=>dispatch({name: e.target.name , value: e.target.value})} value={member.email} type='text' name='email' label="Email" /><br/>
 
-            <button onClick={editMember}>Update</button>
-            <button onClick={()=>history.goBack()}>Cancel</button>
+<TextField required onChange={(e)=>dispatch({name: e.target.name , value: e.target.value})}  value={member.city} type='text' name='city' label="City" /><br/>
+
+
+
+<Button onClick={editMember} variant="contained">Update</Button>
+<Button onClick={()=>history.goBack()} variant="contained">Cancel</Button>
+            
+          
 
         </div>
      );

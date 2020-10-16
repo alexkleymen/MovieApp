@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MovieFilterIcon from '@material-ui/icons/MovieFilter';
+import firebase from '../utils/firebase'
 import {
     BrowserRouter as Router,
     Switch,
@@ -32,6 +33,13 @@ const useStyles = makeStyles((theme) => ({
 export default function ButtonAppBar() {
   const classes = useStyles();
 
+  const logout = () =>{
+    firebase.auth().signOut().then(function(res){
+      console.log(res)
+    })
+    console.log('working')
+  }
+
   return (
     <div className={classes.root}>
       <AppBar position="fixed">
@@ -50,6 +58,9 @@ export default function ButtonAppBar() {
           </Button>
           <Button color="inherit">
           <Link className={classes.link} to='/Usermanagment'>Users</Link>
+          </Button>
+          <Button color="inherit" onClick={logout()}>
+          LogOut
           </Button>
         </Toolbar>
       </AppBar>

@@ -14,10 +14,11 @@ const useStyles = makeStyles({
       maxheight: 800,
       marginBottom: '4px'
     },
-    media: {
-      height: 450,
+    Paper: {
+      height: 210,
       width: 345,
       objectFit: "cover",
+      padding: "5px"
       
     },
     link : {
@@ -45,7 +46,7 @@ const User = (props) => {
     return ( 
     <Grid item xs={3}>
         
-        <Paper style={{padding: '4px'}}>
+        <Paper className={classes.Paper}>
          Name: {props.data.FirstName}<br/>
          User Name: {props.data.UserName}<br/>
          Session Time Out: {props.data.sto}<br/>
@@ -57,7 +58,7 @@ const User = (props) => {
          }<br/>
 
 
-        <Button onClick={()=>deleteUser(props.data.UserName)} size="small" color="primary">Delete</Button>
+        <Button onClick={()=>deleteUser(props.data.id)} size="small" color="primary">Delete</Button>
         <Button    size="small" color="primary">
             <Link className={classes.link}  to={{
                     pathname: '/Usermanagment/edit',
